@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFiltratieUnits, deleteFiltratieUnit } from "../api/filtratie_unit/api.filtratie_unit.ts";
+import {
+  getFiltratieUnits,
+  deleteFiltratieUnit,
+} from "../api/filtratie_unit/api.filtratie_unit.ts";
 import { useAuth } from "../context/auth";
 import { getStatus } from "../components/status.ts";
 import { UNIT_STATUS } from "../types/types.enums.ts";
@@ -26,8 +29,8 @@ export default function AquariumDashboard() {
     }
 
     const waarde = unit.latestWaarde;
-    const range = Array.isArray(unit.waarden_range) 
-      ? unit.waarden_range[0] 
+    const range = Array.isArray(unit.waarden_range)
+      ? unit.waarden_range[0]
       : unit.waarden_range;
 
     if (!range) {
@@ -40,7 +43,7 @@ export default function AquariumDashboard() {
       waarde.water_level,
       waarde.zoutgehalte,
       waarde.microbiologie,
-      range
+      range,
     );
 
     // Map enum values to display labels
@@ -58,10 +61,34 @@ export default function AquariumDashboard() {
 
   const [units, setUnits] = useState([]);
   const [stats, setStats] = useState([
-    { label: "Units total", value: 0, icon: "🔁" },
-    { label: "Active", value: 0, icon: "⚡" },
-    { label: "Need attention", value: 0, icon: "⚠️" },
-    { label: "Logs today", value: 0, icon: "📋" },
+    {
+      label: "Total units",
+      value: 0,
+      icon: "⌾",
+      description: "installations",
+      variant: "primary",
+    },
+    {
+      label: "Active",
+      value: 0,
+      icon: "⌁",
+      description: "operating normally",
+      variant: "success",
+    },
+    {
+      label: "Need attention",
+      value: 0,
+      icon: "△",
+      description: "require review",
+      variant: "warning",
+    },
+    {
+      label: "Logs today",
+      value: 0,
+      icon: "▤",
+      description: "measurements logged",
+      variant: "neutral",
+    },
   ]);
   const [showModal, setShowModal] = useState(false);
   const [showCreateUnitForm, setShowCreateUnitForm] = useState(false);
@@ -95,10 +122,34 @@ export default function AquariumDashboard() {
     }).length;
 
     setStats([
-      { label: "Units total", value: units.length, icon: "🔁" },
-      { label: "Active", value: activeCount, icon: "⚡" },
-      { label: "Need attention", value: needAttentionCount, icon: "⚠️" },
-      { label: "Logs today", value: logsToday, icon: "📋" },
+      {
+        label: "Total units",
+        value: units.length,
+        icon: "⌾",
+        description: "installations",
+        variant: "primary",
+      },
+      {
+        label: "Active",
+        value: activeCount,
+        icon: "⌁",
+        description: "operating normally",
+        variant: "success",
+      },
+      {
+        label: "Need attention",
+        value: needAttentionCount,
+        icon: "△",
+        description: "require review",
+        variant: "warning",
+      },
+      {
+        label: "Logs today",
+        value: logsToday,
+        icon: "▤",
+        description: "measurements logged",
+        variant: "neutral",
+      },
     ]);
   }, [units]);
 
@@ -148,7 +199,10 @@ export default function AquariumDashboard() {
             <p>Here's the state of the park's life support today.</p>
           </div>
           {isAdmin && (
-            <button className="btn-log" onClick={() => setShowCreateUnitForm(true)}>
+            <button
+              className="btn-log"
+              onClick={() => setShowCreateUnitForm(true)}
+            >
               + Nieuwe Filtratie Unit
             </button>
           )}
@@ -162,11 +216,13 @@ export default function AquariumDashboard() {
               icon={s.icon}
               value={s.value}
               label={s.label}
+              description={s.description}
+              variant={s.variant}
             />
           ))}
         </div>
 
-        <div className="xl:col-span-2">
+        <div className="dashboard-chart">
           <PhChart />
         </div>
 

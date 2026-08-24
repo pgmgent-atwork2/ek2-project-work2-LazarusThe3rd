@@ -186,31 +186,65 @@ export default function PHChart() {
       <div className="ph-chart-content">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={currentData}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid
+              stroke="#e8eef3"
+              strokeDasharray="2 3"
+              vertical={false}
+            />
 
-            <XAxis dataKey="date" tickLine={false} axisLine={false} />
-            <YAxis domain={[6.5, 9]} tickLine={false} axisLine={false} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tick={{
+                fill: "#94a3b8",
+                fontSize: 10,
+              }}
+            />
+
+            <YAxis
+              domain={[6.5, 9]}
+              tickLine={false}
+              axisLine={false}
+              tick={{
+                fill: "#94a3b8",
+                fontSize: 10,
+              }}
+              width={30}
+            />
 
             <Tooltip
               contentStyle={{
-                borderRadius: "14px",
-                border: "none",
-                boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+                background: "#ffffff",
+                border: "1px solid #e2e8f0",
+                borderRadius: "8px",
+                boxShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+                fontSize: "12px",
+              }}
+              labelStyle={{
+                color: "#475569",
+                fontWeight: 600,
+                marginBottom: "4px",
               }}
             />
 
             <Line
               type="monotone"
               dataKey="ph"
-              stroke="#2790e6"
-              strokeWidth={5}
-              dot={false}
-              animationDuration={800} //smooth line animation
+              stroke="#0284c7"
+              strokeWidth={2}
+              dot={{
+                r: 2.5,
+                fill: "#0284c7",
+                strokeWidth: 0,
+              }}
               activeDot={{
-                r: 6,
-                stroke: "#06b6d4",
+                r: 4,
+                fill: "#0284c7",
+                stroke: "#ffffff",
                 strokeWidth: 2,
               }}
+              animationDuration={800}
             />
           </LineChart>
         </ResponsiveContainer>

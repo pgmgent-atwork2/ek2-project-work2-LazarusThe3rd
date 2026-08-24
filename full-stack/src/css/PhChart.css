@@ -1,88 +1,97 @@
 .ph-chart-card {
-  background-color: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  border: 1px solid #f3f4f6;
-  padding: 1.25rem;
-}
+  width: 100%;
 
-@media (min-width: 768px) {
-  .ph-chart-card {
-    padding: 1.5rem;
-  }
+  background: #ffffff;
+  border: 1px solid #dbe5ed;
+  border-radius: 9px;
+
+  overflow: hidden;
 }
 
 .ph-chart-header {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 
-@media (min-width: 1024px) {
-  .ph-chart-header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
+  padding: 14px 16px;
+
+  border-bottom: 1px solid #edf2f6;
 }
 
 .ph-chart-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1f2937;
-}
+  margin: 0;
 
-@media (min-width: 768px) {
-  .ph-chart-title {
-    font-size: 1.5rem;
-  }
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 650;
+
+  color: #0f172a;
 }
 
 .ph-chart-filters {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-@media (min-width: 640px) {
-  .ph-chart-filters {
-    flex-direction: row;
-  }
+  align-items: center;
+  gap: 8px;
 }
 
 .ph-chart-select {
-  border: 1px solid #e5e7eb;
-  background-color: #fff;
-  border-radius: 0.75rem;
-  padding: 0.625rem 1rem;
-  font-size: 0.875rem;
-  color: #374151;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+  height: 32px;
+
+  padding: 0 10px;
+
+  border: 1px solid #dbe5ed;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #475569;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+
   cursor: pointer;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ph-chart-select:hover {
-  border-color: #22d3ee;
+  border-color: #93c5fd;
 }
 
 .ph-chart-select:focus {
-  border-color: #06b6d4;
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
 }
 
 .ph-chart-content {
   width: 100%;
-  height: 320px;
+  height: 300px;
+
+  padding: 12px 16px 8px;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 700px) {
+  .ph-chart-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ph-chart-filters {
+    width: 100%;
+  }
+
+  .ph-chart-select {
+    flex: 1;
+    min-width: 0;
+  }
+
   .ph-chart-content {
-    height: 380px;
+    height: 260px;
+    padding: 10px 8px 6px;
   }
 }
-
