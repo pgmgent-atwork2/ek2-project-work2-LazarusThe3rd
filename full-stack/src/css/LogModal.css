@@ -1,0 +1,223 @@
+/* ─────────────────────────────────────────────
+   Log Modal
+   ───────────────────────────────────────────── */
+
+.log-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(4px);
+}
+
+/* ─────────────────────────────────────────────
+   Modal
+   ───────────────────────────────────────────── */
+
+.log-modal {
+  width: 100%;
+  max-width: 440px;
+
+  background: #ffffff;
+  border: 1px solid #dbe5ee;
+  border-radius: 12px;
+
+  padding: 24px;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.16),
+    0 4px 12px rgba(15, 23, 42, 0.06);
+
+  animation: logModalEnter 0.18s ease-out;
+}
+
+@keyframes logModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Header
+   ───────────────────────────────────────────── */
+
+.log-modal h3 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  color: #0f172a;
+}
+
+.log-modal-description {
+  margin: 6px 0 20px;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  color: #64748b;
+}
+
+/* ─────────────────────────────────────────────
+   Form
+   ───────────────────────────────────────────── */
+
+.log-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.log-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.log-modal-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.log-modal select,
+.log-modal textarea {
+  width: 100%;
+
+  border: 1px solid #dbe5ee;
+  border-radius: 8px;
+
+  background: #f8fafc;
+  color: #0f172a;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.log-modal select {
+  height: 40px;
+  padding: 0 12px;
+
+  cursor: pointer;
+}
+
+.log-modal textarea {
+  min-height: 110px;
+  padding: 10px 12px;
+
+  resize: vertical;
+}
+
+.log-modal select:focus,
+.log-modal textarea:focus {
+  border-color: #0ea5e9;
+  background: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+}
+
+.log-modal textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* ─────────────────────────────────────────────
+   Actions
+   ───────────────────────────────────────────── */
+
+.log-modal-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.log-modal-actions button {
+  flex: 1;
+
+  height: 40px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.log-modal-cancel {
+  border: 1px solid #dbe5ee;
+
+  background: #f8fafc;
+  color: #475569;
+}
+
+.log-modal-cancel:hover {
+  background: #eef2f7;
+  border-color: #cbd5e1;
+}
+
+.log-modal-save {
+  border: 1px solid #0879b5;
+
+  background: #0879b5;
+  color: #ffffff;
+}
+
+.log-modal-save:hover {
+  background: #06689d;
+  border-color: #06689d;
+}
+
+.log-modal-actions button:active {
+  transform: translateY(1px);
+}
+
+/* ─────────────────────────────────────────────
+   Mobile
+   ───────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .log-modal-overlay {
+    padding: 16px;
+  }
+
+  .log-modal {
+    padding: 20px;
+  }
+
+  .log-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .log-modal-actions button {
+    width: 100%;
+  }
+}
