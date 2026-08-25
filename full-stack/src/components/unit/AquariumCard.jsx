@@ -298,15 +298,10 @@ export default function AquariumCard({ onLogSubmit }) {
 
   return (
     <>
-      {loading && (
-        <div style={{ padding: "20px", textAlign: "center", color: "#64748b" }}>
-          Loading tank data...
-        </div>
-      )}
+      {loading && <div>Loading tank data...</div>}
 
       {!loading && (
         <div className="aquarium-card">
-          {/* Header */}
           <div className="aquarium-header">
             <div>
               <h1 className="aquarium-title">{tank.naam}</h1>
