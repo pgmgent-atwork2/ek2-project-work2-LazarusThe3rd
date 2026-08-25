@@ -5,11 +5,14 @@ import {
   deleteFiltratieUnit,
 } from "../api/filtratie_unit/api.filtratie_unit.ts";
 import { useAuth } from "../context/auth";
+import { getOnderhoudItems } from "../api/onderhoud/api.onderhoud.ts";
+import UpcomingMaintenance from "../components/Planning/UpcomingMaintenance";
 import { getStatus } from "../components/status.ts";
 import { UNIT_STATUS } from "../types/types.enums.ts";
 import StatCard from "../components/dashboard/StatCard";
 import UnitCard from "../components/dashboard/UnitCard";
 import LogModal from "../components/dashboard/LogModal";
+import StatusBadge from "../components/dashboard/StatusBadge";
 import UnitDetailModal from "../components/dashboard/UnitDetailModal";
 import PhChart from "../components/dashboard/PhChart";
 import CreateFiltratieUnitForm from "../components/Admin/CreateFiltratieUnitForm";
@@ -60,6 +63,8 @@ export default function AquariumDashboard() {
   };
 
   const [units, setUnits] = useState([]);
+
+  const [maintenanceItems, setMaintenanceItems] = useState([]);
   const [stats, setStats] = useState([
     {
       label: "Total units",
@@ -100,10 +105,15 @@ export default function AquariumDashboard() {
     const fetchData = async () => {
       const data = await getFiltratieUnits();
       setUnits(data || []);
+
+      const maintenanceData = await getOnderhoudItems();
+      setMaintenanceItems(maintenanceData || []);
+
       setuser(auth?.user);
     };
+
     fetchData();
-  }, [auth]); // Refetch if auth changes (e.g. user logs in/out)
+  }, [auth]); //
 
   // Update stats when units change
   useEffect(() => {
@@ -227,48 +237,96 @@ export default function AquariumDashboard() {
         </div>
 
         {/* ── Units ── */}
-        <div className="section-header">
-          <h2>Filtration units</h2>
+        {/* ── Dashboard overview ── */}
+        <div className="dashboard-overview-grid">
+          {/* Unit status overview */}
+          <section className="dashboard-panel">
+            <div className="dashboard-panel-header">
+              <div>
+                <h2 className="dashboard-panel-title">Unit Status Overview</h2>
+                <p className="dashboard-panel-subtitle">
+                  Current status across all filtration units
+                </p>
+              </div>
+
+              <button
+                className="dashboard-panel-link"
+                onClick={() => navigate("/units")}
+              >
+                View all
+              </button>
+            </div>
+
+            <div className="unit-status-list">
+              {units.length === 0 ? (
+                <div className="dashboard-empty">
+                  No filtration units available.
+                </div>
+              ) : (
+                units.map((unit) => (
+                  <button
+                    key={unit.id}
+                    className="unit-status-row"
+                    onClick={() =>
+                      setSelectedUnit({
+                        ...unit,
+                        status: getUnitStatus(unit),
+                      })
+                    }
+                  >
+                    <div className="unit-status-info">
+                      <span className="unit-status-name">{unit.naam}</span>
+
+                      <span className="unit-status-location">
+                        {unit.locatie}
+                      </span>
+                    </div>
+
+                    <StatusBadge status={getUnitStatus(unit)} />
+                  </button>
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* Upcoming maintenance */}
+          <UpcomingMaintenance
+            items={maintenanceItems}
+            variant="dashboard"
+            onItemClick={(item) => {
+              setShowModal(true);
+            }}
+          />
         </div>
 
-        <div className="units-grid">
-          {units.map((unit) => (
-            <UnitCard
-              key={unit.id}
-              unit={{ ...unit, status: getUnitStatus(unit) }}
-              onClick={(u) => setSelectedUnit(u)}
-            />
-          ))}
-        </div>
+        {/* ── Log modal ── */}
+        {showModal && (
+          <LogModal
+            units={units}
+            onClose={() => setShowModal(false)}
+            onSave={null /* Implement log saving logic here */}
+          />
+        )}
+
+        {/* ── Unit detail modal ── */}
+        <UnitDetailModal
+          unit={selectedUnit}
+          onClose={() => setSelectedUnit(null)}
+          onViewDetails={(unit) => navigate(`/units/${unit.id}`)}
+          onDelete={handleDeleteUnit}
+          onEdit={handleEditUnit}
+          isAdmin={isAdmin}
+        />
+
+        {/* ── Create/Edit filtratie unit form ── */}
+        {showCreateUnitForm && isAdmin && (
+          <CreateFiltratieUnitForm
+            onSuccess={handleUnitSaved}
+            onCancel={handleCancelForm}
+            editUnit={editUnit}
+          />
+        )}
       </div>
-
-      {/* ── Log modal ── */}
-      {showModal && (
-        <LogModal
-          units={units}
-          onClose={() => setShowModal(false)}
-          onSave={null /* Implement log saving logic here */}
-        />
-      )}
-
-      {/* ── Unit detail modal ── */}
-      <UnitDetailModal
-        unit={selectedUnit}
-        onClose={() => setSelectedUnit(null)}
-        onViewDetails={(unit) => navigate(`/units/${unit.id}`)}
-        onDelete={handleDeleteUnit}
-        onEdit={handleEditUnit}
-        isAdmin={isAdmin}
-      />
-
-      {/* ── Create/Edit filtratie unit form ── */}
-      {showCreateUnitForm && isAdmin && (
-        <CreateFiltratieUnitForm
-          onSuccess={handleUnitSaved}
-          onCancel={handleCancelForm}
-          editUnit={editUnit}
-        />
-      )}
     </>
   );
 }
