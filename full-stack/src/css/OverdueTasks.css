@@ -1,30 +1,89 @@
+/* =========================================================
+   MAINTENANCE OVERVIEW
+========================================================= */
+
 .maintenance-overview {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+
+  margin-top: 24px;
 }
 
+/* =========================================================
+   OVERDUE TASKS
+========================================================= */
+
 .overdue-tasks {
-  background: white;
-  border: 1px solid #dbe3ea;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
+  background: #ffffff;
+  border: 1px solid #dbe5ed;
+  border-radius: 10px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
 }
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .overdue-header {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 16px;
 }
 
+.overdue-header h3 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+.overdue-header p {
+  margin: 4px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   COUNT
+========================================================= */
+
 .overdue-count {
-  padding: 0.25rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+
   border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
 
   background: #fee2e2;
   color: #dc2626;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .maintenance-overview {
+    grid-template-columns: 1fr;
+  }
 }
