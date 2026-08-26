@@ -136,9 +136,26 @@ export default function SeaparkNav() {
 
   return (
     <>
-      <button className="hamburger-btn" onClick={() => setIsOpen(!isOpen)}>
-        ☰
+      {/* Mobile hamburger */}
+      <button
+        className={`hamburger-btn ${isOpen ? "open" : ""}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close navigation" : "Open navigation"}
+        aria-expanded={isOpen}
+      >
+        {isOpen ? "✕" : "☰"}
       </button>
+
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div
+          className="nav-overlay"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Navigation */}
       <nav className={`sp-nav ${isOpen ? "open" : ""}`}>
         {/* Brand */}
         <div className="sp-brand">
@@ -158,6 +175,7 @@ export default function SeaparkNav() {
               <path d="M2 7c2-4 6-4 8 0s6 4 8 0" />
             </svg>
           </div>
+
           <div className="sp-brand-text">
             <span className="sp-brand-name">Seapark LSS</span>
             <span className="sp-brand-sub">Filtration Ops</span>
@@ -167,7 +185,7 @@ export default function SeaparkNav() {
         {/* Nav items */}
         <div className="sp-nav-list">
           {navItems.map(({ label, path, icon }) => {
-            // Hide Reports link for non-supervisor/admin users
+            // Reports is only visible for supervisors and admins
             if (
               label === "Reports" &&
               user?.rol !== "supervisor" &&
@@ -175,16 +193,20 @@ export default function SeaparkNav() {
             ) {
               return null;
             }
-            // Hide Admin link for non-admin users
+
+            // Admin is only visible for admins
             if (label === "Admin" && user?.rol !== "admin") {
               return null;
             }
+
             return (
               <Link
                 key={label}
                 to={path}
                 onClick={() => setIsOpen(false)}
-                className={`sp-nav-item${location.pathname === path ? " active" : ""}`}
+                className={`sp-nav-item${
+                  location.pathname === path ? " active" : ""
+                }`}
               >
                 {icon}
                 {label}
@@ -197,8 +219,10 @@ export default function SeaparkNav() {
         <div className="sp-footer">
           <div className="sp-user">
             <span className="sp-user-name">{user?.naam || "User"}</span>
+
             <span className="sp-user-role">{user?.rol || ""}</span>
           </div>
+
           <button className="sp-signout" onClick={() => logout()}>
             <SignOutIcon />
             Sign out
