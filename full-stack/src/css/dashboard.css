@@ -98,19 +98,21 @@
 .stat-card {
   min-height: 96px;
   padding: 16px 18px;
+
   background: #ffffff;
   border: 1px solid #dbe5ed;
   border-radius: 10px;
+
   transition:
+    transform 0.2s ease,
     border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
 .stat-card:hover {
-  border-color: #cbd9e4;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  border-color: #b8dce3;
+  box-shadow: 0 8px 22px rgba(15, 61, 69, 0.08);
 }
 
 .stat-card-header {
@@ -195,6 +197,17 @@
   border: 1px solid #dbe5ee;
   border-radius: 10px;
   overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard-panel:hover {
+  transform: translateY(-2px);
+  border-color: #b8dce3;
+  box-shadow: 0 8px 22px rgba(15, 61, 69, 0.07);
 }
 
 .dashboard-panel-header {
@@ -222,16 +235,30 @@
 .dashboard-panel-link {
   border: 1px solid #dbe5ee;
   background: #ffffff;
-  color: #0f172a;
+  color: #0f5966;
+
   padding: 6px 10px;
   border-radius: 6px;
+
   font-size: 12px;
+  font-weight: 500;
+
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .dashboard-panel-link:hover {
-  background: #f1f7fb;
-  border-color: #c5d5e3;
+  background: #f0f8f9;
+  border-color: #b8dce3;
+  color: #0b5966;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(15, 61, 69, 0.06);
 }
 
 .unit-status-list {
@@ -245,25 +272,30 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+
   padding: 15px 20px;
+
   border: 0;
   border-bottom: 1px solid #edf2f7;
+
   background: #ffffff;
   color: #0f172a;
+
   text-align: left;
   cursor: pointer;
+
   transition:
-    background-color 0.15s ease,
-    padding-left 0.15s ease;
+    background-color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.unit-status-row:hover {
+  background: #f4fafb;
+  padding-left: 24px;
 }
 
 .unit-status-row:last-child {
   border-bottom: 0;
-}
-
-.unit-status-row:hover {
-  background: #f8fbfd;
-  padding-left: 24px;
 }
 
 .unit-status-row:focus-visible {
