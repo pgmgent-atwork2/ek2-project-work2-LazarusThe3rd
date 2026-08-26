@@ -21,23 +21,37 @@ const WaterQualityChart = () => {
       const data = await getWaterniveauTrend("all");
       if (data && data.length > 0) {
         // Get unique units
-        const uniqueUnits = [...new Set(data.map(d => d.unit_naam))];
+        const uniqueUnits = [...new Set(data.map((d) => d.unit_naam))];
         setUnits(uniqueUnits);
 
         // Filter by date range
-        const now = new Date();
-        const daysMap = { "7days": 7, "30days": 30, "90days": 90 };
+        const latestDate = Math.max(
+          ...data.map((item) => new Date(item.gemeten_op).getTime()),
+        );
+
+        const now = new Date(latestDate);
+
+        const daysMap = {
+          "7days": 7,
+          "30days": 30,
+          "90days": 90,
+        };
+
         const days = daysMap[range];
+
         const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
-        
-        const filtered = data.filter(d => new Date(d.gemeten_op) >= cutoff);
+
+        const filtered = data.filter((d) => new Date(d.gemeten_op) >= cutoff);
 
         // Group by date and pivot by unit
         const grouped = {};
-        filtered.forEach(item => {
+        filtered.forEach((item) => {
           const date = new Date(item.gemeten_op);
-          const dateKey = date.toLocaleDateString('nl-NL', { month: 'short', day: 'numeric' });
-          
+          const dateKey = date.toLocaleDateString("nl-NL", {
+            month: "short",
+            day: "numeric",
+          });
+
           if (!grouped[dateKey]) {
             grouped[dateKey] = { day: dateKey };
           }
@@ -64,7 +78,7 @@ const WaterQualityChart = () => {
       </div>
 
       <div className="water-quality-chart-content">
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="day" tickLine={false} axisLine={false} />
@@ -78,7 +92,9 @@ const WaterQualityChart = () => {
                 dataKey={unit}
                 stroke={colors[index % colors.length]}
                 strokeWidth={3}
-                dot={false}
+                dot={{ r: 4 }}
+                activeDot={{ r: 6 }}
+                connectNulls
               />
             ))}
           </LineChart>
