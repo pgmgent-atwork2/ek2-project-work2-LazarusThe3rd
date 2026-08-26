@@ -1,0 +1,125 @@
+/* =========================================================
+   TEMPERATURE TREND CHART
+   ========================================================= */
+
+.temperature-chart-card {
+  background: #ffffff;
+  border: 1px solid #dbe5ee;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 380px;
+  height: 100%;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.temperature-chart-card:hover {
+  border-color: #c5d5e3;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+
+/* Header */
+
+.temperature-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.temperature-chart-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 650;
+  color: #0f172a;
+}
+
+/* Filter */
+
+.temperature-chart-filter {
+  min-width: 110px;
+  padding: 0.45rem 0.7rem;
+
+  background: #ffffff;
+  border: 1px solid #dbe5ee;
+  border-radius: 8px;
+
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  cursor: pointer;
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.temperature-chart-filter:hover {
+  border-color: #94a3b8;
+}
+
+.temperature-chart-filter:focus {
+  border-color: #0ea5c6;
+  box-shadow: 0 0 0 3px rgba(14, 165, 198, 0.12);
+}
+
+/* Chart */
+
+.temperature-chart-content {
+  width: 100%;
+  height: 300px;
+  margin-top: 0.25rem;
+}
+
+/* Recharts grid */
+
+.temperature-chart-content .recharts-cartesian-grid-horizontal line,
+.temperature-chart-content .recharts-cartesian-grid-vertical line {
+  stroke: #e2e8f0;
+  stroke-dasharray: 4 4;
+}
+
+/* Axis labels */
+
+.temperature-chart-content .recharts-xAxis text,
+.temperature-chart-content .recharts-yAxis text {
+  fill: #64748b;
+  font-size: 11px;
+}
+
+/* Tooltip */
+
+.temperature-chart-content .recharts-default-tooltip {
+  background: #ffffff !important;
+  border: 1px solid #dbe5ee !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .temperature-chart-header {
+    align-items: flex-start;
+  }
+
+  .temperature-chart-header h2 {
+    font-size: 1rem;
+  }
+
+  .temperature-chart-filter {
+    min-width: 100px;
+  }
+
+  .temperature-chart-content {
+    height: 260px;
+  }
+}
