@@ -1,23 +1,69 @@
 .maintenance-card {
-  background: white;
+  width: 100%;
+  min-height: 380px;
+  background: #ffffff;
+  border: 1px solid #dbe5ee;
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
+  padding: 1.25rem;
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.maintenance-card:hover {
+  border-color: #c5d5e3;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
 }
 
 .maintenance-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 1rem;
 }
 
+.maintenance-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 650;
+  color: #0f172a;
+}
+
 .maintenance-filter {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #dbe4e8;
+  min-width: 110px;
+  padding: 0.45rem 0.7rem;
+
+  background: #ffffff;
+  border: 1px solid #dbe5ee;
   border-radius: 8px;
+
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  cursor: pointer;
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.maintenance-filter:hover {
+  border-color: #94a3b8;
+}
+
+.maintenance-filter:focus {
+  border-color: #0ea5c6;
+  box-shadow: 0 0 0 3px rgba(14, 165, 198, 0.12);
 }
 
 .maintenance-chart-content {
-  height: 350px;
+  width: 100%;
+  height: 300px;
+  margin-top: 0.25rem;
 }
