@@ -12,9 +12,19 @@
   border-radius: 12px;
   padding: 1.5rem;
   min-height: 600px;
+  box-sizing: border-box;
+
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+.calendar-container:hover {
+  border-color: #cbd9e4;
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.05);
+}
 /* =========================================================
    CALENDAR HEADER
 ========================================================= */
@@ -141,19 +151,17 @@
 
 .calendar-day {
   min-height: 180px;
-
   padding: 0.6rem;
 
   background: #ffffff;
-
   border-right: 1px solid #e8eef4;
   border-bottom: 1px solid #e8eef4;
 
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease;
 }
 
 .calendar-day:hover {
-  background: #fbfdff;
+  background: #f8fbfd;
 }
 
 /* =========================================================
@@ -169,19 +177,20 @@
   border-radius: 7px;
 
   background: #ffffff;
-
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 
   cursor: pointer;
 
   transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .task-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2px);
+  border-color: #cbd9e4;
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
 }
 
 .task-card h4 {
