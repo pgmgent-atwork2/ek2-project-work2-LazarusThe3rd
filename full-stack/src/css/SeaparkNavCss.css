@@ -3,12 +3,18 @@
 .sp-nav {
   font-family: "DM Sans", sans-serif;
   width: 220px;
-  min-height: 100vh;
+  height: 100vh;
   background: #f0f8f9;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #daeef1;
-  position: relative;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+  flex-shrink: 0;
 }
 
 .sp-brand {
@@ -151,11 +157,9 @@
 @media (max-width: 768px) {
   .hamburger-btn {
     display: flex;
-
     position: fixed;
-
     top: 12px;
-    left: 12px;
+    right: 12px;
 
     width: 40px;
     height: 40px;
@@ -163,26 +167,61 @@
     align-items: center;
     justify-content: center;
 
-    border: none;
-    background: transparent;
+    border: 1px solid #dbe5ed;
+    border-radius: 8px;
 
-    font-size: 22px;
+    background: #ffffff;
+    color: #0f5966;
+
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 1600;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .hamburger-btn:hover {
+    background: #f0f8f9;
+    color: #0b5966;
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.28);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    z-index: 1400;
   }
 
   .sp-nav {
     position: fixed;
     top: 0;
-    left: -220px;
+    right: -220px;
+    left: auto;
 
     width: 220px;
     height: 100vh;
 
     z-index: 1500;
 
-    transition: left 0.3s ease;
+    transition: right 0.3s ease;
+
+    box-shadow: -4px 0 20px rgba(15, 23, 42, 0.12);
   }
 
   .sp-nav.open {
-    left: 0;
+    right: 0;
   }
 }
