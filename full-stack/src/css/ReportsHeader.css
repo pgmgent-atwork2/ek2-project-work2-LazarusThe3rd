@@ -28,6 +28,8 @@
   color: #64748b;
 }
 
+/* ─── Header Controls ─────────────────────────────────────────── */
+
 .reports-header-right {
   display: flex;
   align-items: center;
@@ -39,11 +41,12 @@
 .reports-header-right select,
 .reports-header-right button {
   height: 40px;
-  border-radius: 7px;
+  border-radius: 8px;
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
@@ -51,46 +54,57 @@
     transform 0.2s ease;
 }
 
+/* ─── Filters ─────────────────────────────────────────────────── */
+
 .reports-header-right select {
   min-width: 145px;
   padding: 0 34px 0 12px;
-  border: 1px solid #cbd9e4;
+
+  border: 1px solid #dbe5ee;
   background: #ffffff;
   color: #334155;
+
   outline: none;
 }
 
 .reports-header-right select:hover {
-  border-color: #94a3b8;
+  background: #f8fbfd;
+  border-color: #b8cbd6;
 }
 
 .reports-header-right select:focus-visible {
-  border-color: #0284c7;
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  border-color: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.12);
 }
 
-/* ─── Export Button ────────────────────────────────────────────── */
+/* ─── Export Button ───────────────────────────────────────────── */
 
 .reports-header-right button {
   padding: 0 16px;
-  border: 1px solid #0284c7;
-  background: #0284c7;
+
+  border: 1px solid #0891b2;
+  background: #0891b2;
   color: #ffffff;
 }
 
 .reports-header-right button:hover {
-  background: #0369a1;
-  border-color: #0369a1;
+  background: #0e7490;
+  border-color: #0e7490;
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(3, 105, 161, 0.18);
+  box-shadow: 0 5px 12px rgba(8, 145, 178, 0.18);
+}
+
+.reports-header-right button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .reports-header-right button:focus-visible {
-  outline: 3px solid rgba(14, 165, 233, 0.25);
+  outline: 3px solid rgba(8, 145, 178, 0.2);
   outline-offset: 2px;
 }
 
-/* ─── Responsive ──────────────────────────────────────────────── */
+/* ─── Responsive ─────────────────────────────────────────────── */
 
 @media (max-width: 800px) {
   .reports-header {
