@@ -38,9 +38,19 @@
   grid-column: 1 / -1;
   padding: 48px 24px;
   text-align: center;
+
   background: #ffffff;
   border: 1px solid #dbe5ed;
-  border-radius: 10px;
+  border-radius: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.units-empty:hover {
+  border-color: #b8dce3;
+  box-shadow: 0 8px 22px rgba(15, 61, 69, 0.06);
 }
 
 .units-empty h3 {
