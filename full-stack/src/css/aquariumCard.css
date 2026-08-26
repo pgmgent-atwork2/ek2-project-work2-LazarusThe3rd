@@ -19,6 +19,17 @@
   padding: 24px;
   font-family: "Inter", sans-serif;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.aquarium-card:hover {
+  transform: translateY(-3px);
+  border-color: #a9d4dc;
+  box-shadow: 0 10px 26px rgba(15, 61, 69, 0.09);
 }
 
 /* ─── Header ───────────────────────────────────────────────────────────────── */
@@ -57,9 +68,10 @@
 }
 
 .location-badge {
-  background: #7c3aed;
-  color: #ffffff;
-  border-radius: 5px;
+  background: #e0f2f4;
+  color: #0b5966;
+  border: 1px solid #c5e5e9;
+  border-radius: 6px;
   padding: 4px 8px;
   font-size: 11px;
   font-weight: 600;
@@ -434,21 +446,24 @@
   width: 100%;
   background: #ffffff;
   border: 1px solid #dbe5ee;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 18px 20px;
   color: #0f172a;
   cursor: pointer;
   text-align: left;
+
   transition:
+    transform 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease,
-    transform 0.2s ease;
+    background-color 0.2s ease;
 }
 
 .unit-card:hover {
-  border-color: #bfd2df;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  background: #fcfeff;
+  border-color: #a9d4dc;
+  box-shadow: 0 10px 26px rgba(15, 61, 69, 0.09);
 }
 
 .unit-card:focus-visible {
@@ -473,6 +488,12 @@
   line-height: 1.35;
   font-weight: 600;
   color: #0f172a;
+
+  transition: color 0.2s ease;
+}
+
+.unit-card:hover .unit-name {
+  color: #0b5966;
 }
 
 .unit-location {
@@ -485,7 +506,7 @@
 .unit-card-divider {
   height: 1px;
   margin: 16px 0;
-  background: #edf2f7;
+  background: #eef3f6;
 }
 
 .unit-card-details {
@@ -522,18 +543,23 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+
+  width: 30px;
+  height: 30px;
+
   border-radius: 50%;
-  background: #f1f7fb;
-  color: #0369a1;
-  font-size: 15px;
+
+  background: #f0f8f9;
+  color: #0e7490;
+
   transition:
     background-color 0.2s ease,
+    color 0.2s ease,
     transform 0.2s ease;
 }
 
 .unit-card:hover .unit-card-arrow {
-  background: #e0f2fe;
-  transform: translateX(2px);
+  background: #d8eff3;
+  color: #0b5966;
+  transform: translateX(3px);
 }
