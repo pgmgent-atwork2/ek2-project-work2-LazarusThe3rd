@@ -10,7 +10,6 @@ import UpcomingMaintenance from "../components/Planning/UpcomingMaintenance";
 import { getStatus } from "../components/status.ts";
 import { UNIT_STATUS } from "../types/types.enums.ts";
 import StatCard from "../components/dashboard/StatCard";
-import UnitCard from "../components/dashboard/UnitCard";
 import LogModal from "../components/dashboard/LogModal";
 import StatusBadge from "../components/dashboard/StatusBadge";
 import UnitDetailModal from "../components/dashboard/UnitDetailModal";
