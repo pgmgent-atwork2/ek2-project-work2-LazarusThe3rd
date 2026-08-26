@@ -9,6 +9,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import "../../css/TemperatureTrendChart.css";
 
 const TemperatureTrendChart = () => {
   const [range, setRange] = useState("7days");
@@ -20,23 +21,37 @@ const TemperatureTrendChart = () => {
       const data = await getTemperatuurTrend("all");
       if (data && data.length > 0) {
         // Get unique units
-        const uniqueUnits = [...new Set(data.map(d => d.unit_naam))];
+        const uniqueUnits = [...new Set(data.map((d) => d.unit_naam))];
         setUnits(uniqueUnits);
 
         // Filter by date range
-        const now = new Date();
-        const daysMap = { "7days": 7, "30days": 30, "90days": 90 };
+        const latestDate = Math.max(
+          ...data.map((item) => new Date(item.gemeten_op).getTime()),
+        );
+
+        const now = new Date(latestDate);
+
+        const daysMap = {
+          "7days": 7,
+          "30days": 30,
+          "90days": 90,
+        };
+
         const days = daysMap[range];
+
         const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
-        
-        const filtered = data.filter(d => new Date(d.gemeten_op) >= cutoff);
+
+        const filtered = data.filter((d) => new Date(d.gemeten_op) >= cutoff);
 
         // Group by date and pivot by unit
         const grouped = {};
-        filtered.forEach(item => {
+        filtered.forEach((item) => {
           const date = new Date(item.gemeten_op);
-          const dateKey = date.toLocaleDateString('nl-NL', { month: 'short', day: 'numeric' });
-          
+          const dateKey = date.toLocaleDateString("nl-NL", {
+            month: "short",
+            day: "numeric",
+          });
+
           if (!grouped[dateKey]) {
             grouped[dateKey] = { day: dateKey };
           }
@@ -52,12 +67,12 @@ const TemperatureTrendChart = () => {
   const colors = ["#2563eb", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
 
   return (
-    <section className="chart-card">
-      <div className="chart-header">
+    <section className="temperature-chart-card">
+      <div className="temperature-chart-header">
         <h2>Temperature Trend</h2>
 
         <select
-          className="chart-filter"
+          className="temperature-chart-filter"
           value={range}
           onChange={(e) => setRange(e.target.value)}
         >
@@ -67,12 +82,15 @@ const TemperatureTrendChart = () => {
         </select>
       </div>
 
-      <div className="reports-ph-chart">
-        <ResponsiveContainer width="100%" height={300}>
+      <div className="temperature-chart-content">
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
+
             <XAxis dataKey="day" tickLine={false} axisLine={false} />
+
             <YAxis domain={[13, 16]} tickLine={false} axisLine={false} />
+
             <Tooltip />
 
             {units.map((unit, index) => (
@@ -82,7 +100,9 @@ const TemperatureTrendChart = () => {
                 dataKey={unit}
                 stroke={colors[index % colors.length]}
                 strokeWidth={3}
-                dot={false}
+                dot={{ r: 4 }}
+                activeDot={{ r: 6 }}
+                connectNulls
               />
             ))}
           </LineChart>
